@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Tracking</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+}
+
+/* Top Orange Bar */
+.top-bar {
+    background-color: #f85606;
+    padding: 10px 0;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+}
+
+/* Main Header */
+.header {
+    background-color: #ffffff;
+    padding: 15px 0;
+    box-shadow: 0px 2px 8px rgba(0,0,0,0.1);
+}
+
+.header-container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo */
+.logo img {
+    height: 50px;
+}
+
+/* Search Bar */
+.search-box {
+    flex: 1;
+    margin: 0 20px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #f85606;
+    border-radius: 5px;
+    outline: none;
+}
+
+/* Button */
+.search-box button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 12px;
+    background-color: #f85606;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background-color: #d94400;
+}
+
+/* Main Section */
+.main {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.main h1 {
+    color: #f85606;
+}
+
+.footer {
+    margin-top: 80px;
+    padding: 20px;
+    background-color: #ffffff;
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-bar">
+    Welcome to Order Tracking System
+</div>
+
+<div class="header">
+    <div class="header-container">
+        
+        <!-- Aapka diya hua logo -->
+        <div class="logo">
+            <img src="logo.png" alt="Daraz Logo">
+        </div>
+
+        <div class="search-box">
+            <input type="text" id="orderInput" placeholder="Enter Order Number">
+            <button onclick="scanOrder()">Track Order</button>
+        </div>
+
+    </div>
+</div>
+
+<div class="main">
+    <h1>Track Your Order Easily</h1>
+    <p>Enter your order number above to check details.</p>
+</div>
+
+<div class="footer">
+    © 2026 Order Tracking | Designed Like Daraz Style
+</div>
+
+<script>
+function scanOrder() {
+    var value = document.getElementById("orderInput").value.trim();
+
+    if(value === "") {
+        alert("Please enter order number");
+        return;
+    }
+
+    window.location.href = value + ".html";
+}
+</script>
+
+</body>
+</html>
